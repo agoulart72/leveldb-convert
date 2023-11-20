@@ -9,7 +9,7 @@ import (
 	"github.com/syndtr/goleveldb/leveldb"
 )
 
-func ConvertLeveldbToJson(files []string) error {
+func ConvertLeveldbToJson(files []string, output string) error {
 
 	for _, fileName := range files {
 
