@@ -41,6 +41,10 @@ func ConvertJsonToLeveldb(files []string) error {
 		for key, value := range jsonMap {
 			batch.Put([]byte(key), []byte(value.(string)))
 		}
+		err = db.Write(batch, nil)
+		if err != nil {
+			return fmt.Errorf("error writing LevelDB %w", err)
+		}
 
 		fmt.Println(fileName, " converted with success to ", outputFileName)
 	}

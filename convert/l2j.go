@@ -31,7 +31,7 @@ func ConvertLeveldbToJson(files []string) error {
 		for iter.Next() {
 			key := iter.Key()
 			value := iter.Value()
-			jsonMap[string(key)] = value
+			jsonMap[string(key)] = string(value)
 		}
 		iter.Release()
 		err = iter.Error()
