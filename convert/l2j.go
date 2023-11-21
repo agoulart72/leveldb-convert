@@ -31,7 +31,7 @@ func ConvertLeveldbToJson(files []string, output string) error {
 		for iter.Next() {
 			key := iter.Key()
 			value := iter.Value()
-			jsonMap[string(key)] = string(value)
+			jsonMap[string(key)], err = valueUnmarshal(value)
 		}
 		iter.Release()
 		err = iter.Error()
@@ -52,4 +52,16 @@ func ConvertLeveldbToJson(files []string, output string) error {
 	}
 
 	return nil
+}
+
+func valueUnmarshal(value []byte) (map[string]any, error) {
+
+	var resp map[string]any
+
+	err := json.Unmarshal(value, &resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
 }
