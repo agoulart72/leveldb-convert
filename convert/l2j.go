@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/syndtr/goleveldb/leveldb"
 )
@@ -13,11 +12,7 @@ func ConvertLeveldbToJson(files []string, output string) error {
 
 	for _, fileName := range files {
 
-		p := strings.Split(fileName, "/")
-		path := strings.Join(p[:len(p)-1], "/")
-
-		fn := strings.Split(p[len(p)-1], ".")
-		outputFileName := path + "/" + strings.Join(fn[:len(fn)-1], ".") + ".json"
+		outputFileName := getOutputName(fileName, output, ".json")
 
 		db, err := leveldb.OpenFile(fileName, nil)
 		if err != nil {
