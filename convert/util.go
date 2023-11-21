@@ -5,6 +5,9 @@ import "strings"
 func getOutputName(filename string, output string, suffix string) string {
 
 	if len(strings.TrimSpace(output)) > 0 {
+		if !strings.HasSuffix(output, suffix) {
+			output = output + suffix
+		}
 		return output
 	}
 

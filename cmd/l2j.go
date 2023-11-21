@@ -15,7 +15,7 @@ var l2jCmd = &cobra.Command{
 	Long:  `Convert from leveldb to json`,
 	Args:  cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		outputFile, _ := cmd.PersistentFlags().GetString("output")
+		outputFile, _ := cmd.Parent().PersistentFlags().GetString("output")
 		return convert.ConvertLeveldbToJson(args, outputFile)
 	},
 }
